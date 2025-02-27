@@ -11,15 +11,20 @@ def is_device_connected():
 
 def get_boot_time():
     cmd = "adb shell cat /proc/uptime"
-    result = subprocess.check_output(cmd, shell=True).decode().strip()
-    uptime_seconds = float(result.split()[0])
-    current_time = time.time()
-    return current_time - uptime_seconds
+    try:
+        result = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT).decode().strip()
+        uptime_seconds = float(result.split()[0])
+        current_time = time.time()
+        return current_time - uptime_seconds
+
+    except subprocess.CalledProcessError as e:
+        print("ADB Execute Error:", e.output.decode())
+        return None
 
 
 def measure_boot_complete_time():
     boot_start_time = get_boot_time()
-    print(f"🔹 Boot Start Time (Unix): {boot_start_time}")
+    print(f"Boot Start Time (Unix): {boot_start_time}")
 
     cmd = "adb logcat -b all -v time"
     process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
