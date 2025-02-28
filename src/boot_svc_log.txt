@@ -1,0 +1,2 @@
+02-27 21:48:58.654 I/PhoneGlobals( 3641): !@Boot_SVC: PhoneApp OnCreate
+02-27 21:49:01.218 D/SST     ( 3641): !@Boot_SVC: CS Registered
