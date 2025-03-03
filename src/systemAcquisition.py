@@ -59,57 +59,7 @@ def measure_boot_complete_time():
 
         print("Created boot_log.txt")
 
-        # Get SVC Log
-        save_boot_svc_log()
-
     except subprocess.CalledProcessError as e:
         print("ADB Execute Error:", e.output.decode())
         return None
 
-def save_boot_svc_log():
-    print("Collecting SVC logs...")
-    try:
-        cmd = "adb logcat -b all -v time"
-        process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
-
-        with open("boot_svc_log.txt", "w") as log_file:
-            for line in iter(process.stdout.readline, ''):
-                if "!@Boot_SVC: PhoneApp OnCreate" in line:
-                    print(line.strip())
-                    log_file.write(line)
-                if "!@Boot_SVC: setRadioPower on" in line:
-                    print(line.strip())
-                    log_file.write(line)
-                if "!@Boot_SVC: CS Registered" in line:
-                    print(line.strip())
-                    log_file.write(line)
-                if "!@Boot_SVC: GPRS Attached" in line:
-                    print(line.strip())
-                    log_file.write(line)
-                if "!@Boot_SVC : SIM onAllRecordsLoaded" in line:
-                    print(line.strip())
-                    log_file.write(line)
-                if "!@Boot_SVC : setupDataCall" in line:
-                    print(line.strip())
-                    log_file.write(line)
-                    break
-
-        process.terminate()
-        print("Created boot_svc_log.txt")
-
-    except subprocess.CalledProcessError as e:
-        print("Error", e.output.decode())
-
-
-if __name__ == "__main__":
-    print("Waiting for device to connect...")
-
-
-    while not is_device_connected():
-        time.sleep(0.1)
-
-    print("Device connected! Measuring boot time...")
-    measure_boot_complete_time()
-
-    print("System Acquisition Finished ")
-    sys.exit(0)

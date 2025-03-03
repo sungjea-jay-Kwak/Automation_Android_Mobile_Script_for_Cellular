@@ -1,7 +1,0 @@
-02-28 20:16:01.030 I/PhoneGlobals( 3555): !@Boot_SVC: PhoneApp OnCreate
-02-28 20:16:02.153 I/RILJ    ( 3555): !@Boot_SVC: setRadioPower on
-02-28 20:16:02.766 I/RILJ    ( 3555): !@Boot_SVC: setRadioPower on
-02-28 20:16:03.592 D/SST     ( 3555): !@Boot_SVC: CS Registered
-02-28 20:16:03.613 D/SST     ( 3555): !@Boot_SVC: GPRS Attached
-02-28 20:16:04.362 I/SIMRecords( 3555): !@Boot_SVC : SIM onAllRecordsLoaded
-02-28 20:16:04.734 I/RILJ    ( 3555): !@Boot_SVC : setupDataCall

@@ -1,44 +1,40 @@
-import sys
-import time
 import subprocess
-from PyQt5.QtWidgets import QApplication, QLabel, QVBoxLayout, QWidget, QPushButton
+import time
 
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout
+from PyQt5.QtGui import QFont  # QFont를 import
 
-class TestApp(QWidget):
-    def __init__(self):
-        super().__init__()
+from src.getDeviceId import get_device_id
+from src.getSVCLog import save_boot_svc_log
 
-        self.label = QLabel("테스트 준비 중...")
-        self.button = QPushButton("부팅 테스트 실행")
-        self.button.clicked.connect(self.run_boot_test)
+app = QApplication([])
 
-        layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.button)
+window = QWidget()
+window.setWindowTitle("디바이스 아이디 가져오기")
+window.setGeometry(100, 100, 400, 300)
 
-        self.setLayout(layout)
+layout = QVBoxLayout()
 
-    def run_boot_test(self):
-        self.label.setText("⏳ 부팅 테스트 실행 중...")
-        print("✅ 디바이스 연결됨! 부팅 테스트 실행")  # 여전히 콘솔에 출력되지만...
+label = QLabel("여기에 텍스트가 표시됩니다.", window)
+label.setFont(QFont("Arial", 14))
+layout.addWidget(label)
 
-        # 부팅 테스트 실행
-        script_path = "src/systemAcquisition.py"
+device_id_label = QLabel("디바이스 아이디: 없음", window)
+device_id_label.setFont(QFont("Arial", 12))
+layout.addWidget(device_id_label)
 
-        # subprocess.run으로 실행하여 결과를 기다림
-        try:
-            result = subprocess.run([sys.executable, script_path], check=True, text=True, capture_output=True)
-            # 출력된 로그를 GUI에 표시
-            self.label.setText(f"테스트 완료: {result.stdout}")
-            print(f"부팅 테스트 완료: {result.stdout}")
+btn = QPushButton("Device ID List", window)
+btn.setFont(QFont("Arial", 14))
+btn.clicked.connect(lambda: get_device_id(device_id_label))
+layout.addWidget(btn)
 
-        except subprocess.CalledProcessError as e:
-            self.label.setText(f"테스트 실패: {e}")
-            print(f"테스트 중 오류 발생: {e}")
+btn = QPushButton("Crete SVC Logs", window)
+btn.setFont(QFont("Arial", 14))
+btn.clicked.connect(save_boot_svc_log)
+layout.addWidget(btn)
 
+window.setLayout(layout)
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = TestApp()
-    window.show()
-    sys.exit(app.exec_())
+window.show()
+
+app.exec_()
