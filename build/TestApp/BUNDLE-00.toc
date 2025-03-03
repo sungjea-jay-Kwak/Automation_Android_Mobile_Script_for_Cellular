@@ -1,0 +1,3 @@
+([('TestApp',
+   '/Users/sungjeakwak/Documents/GitHub/Automation_Android_Mobile_Script_for_Cellular/dist/TestApp',
+   'EXECUTABLE')],)

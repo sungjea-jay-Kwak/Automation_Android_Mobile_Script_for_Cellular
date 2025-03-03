@@ -1,0 +1,7 @@
+03-01 21:32:33.835 I/PhoneGlobals( 3580): !@Boot_SVC: PhoneApp OnCreate
+03-01 21:32:35.031 I/RILJ    ( 3580): !@Boot_SVC: setRadioPower on
+03-01 21:32:35.540 I/RILJ    ( 3580): !@Boot_SVC: setRadioPower on
+03-01 21:32:36.387 D/SST     ( 3580): !@Boot_SVC: CS Registered
+03-01 21:32:36.415 D/SST     ( 3580): !@Boot_SVC: GPRS Attached
+03-01 21:32:37.130 I/SIMRecords( 3580): !@Boot_SVC : SIM onAllRecordsLoaded
+03-01 21:32:37.475 I/RILJ    ( 3580): !@Boot_SVC : setupDataCall
