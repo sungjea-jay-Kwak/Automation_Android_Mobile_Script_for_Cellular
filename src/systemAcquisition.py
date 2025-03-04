@@ -4,12 +4,6 @@ import time
 
 LOG_FILE = "boot_log.txt"
 
-def is_device_connected():
-    cmd = "adb devices"
-    result = subprocess.check_output(cmd, shell=True).decode().strip().split("\n")
-    devices = [line for line in result if "\tdevice" in line]
-    return len(devices) > 0
-
 def get_boot_time():
     cmd = "adb shell cat /proc/uptime"
     try:

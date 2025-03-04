@@ -30,4 +30,4 @@ def get_network_data():
     except subprocess.CalledProcessError as e:
         print(f"Error: {e}")
 
-    return network_data
+    print(network_data)
